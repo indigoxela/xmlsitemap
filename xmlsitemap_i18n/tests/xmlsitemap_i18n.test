@@ -54,6 +54,7 @@ class XMLSitemapI18nWebTestCase extends XMLSitemapTestHelper {
     $sitemap = new stdClass();
     $sitemap->context = array('language' => 'fr');
     xmlsitemap_sitemap_save($sitemap);
+    return TRUE;
   }
 
 }
@@ -145,6 +146,7 @@ class XMLSitemapI18nNodeTest extends XMLSitemapI18nWebTestCase {
     config_set('i18n.settings', 'language_content_type_page', 1);
     $this->admin_user = $this->backdropCreateUser(array('administer nodes'));
     $this->backdropLogin($this->admin_user);
+    return TRUE;
   }
 
   /**

@@ -30,6 +30,7 @@ class XMLSitemapEnginesFunctionalTest extends XMLSitemapTestHelper {
     $this->backdropLogin($this->admin_user);
 
     $this->submit_url = url('ping', array('absolute' => TRUE, 'query' => array('sitemap' => ''))) . '[sitemap]';
+    return TRUE;
   }
 
   /**

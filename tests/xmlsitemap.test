@@ -29,6 +29,7 @@ class XMLSitemapTestHelper extends BackdropWebTestCase {
   public function setUp($modules = array()) {
     array_unshift($modules, 'xmlsitemap');
     parent::setUp($modules);
+    return TRUE;
   }
 
   /**
@@ -860,6 +861,7 @@ class XMLSitemapFunctionalTest extends XMLSitemapTestHelper {
       'administer xmlsitemap',
     ));
     $this->backdropLogin($this->admin_user);
+    return TRUE;
   }
 
   /**
@@ -946,6 +948,7 @@ class XMLSitemapRobotsTxtIntegrationTest extends XMLSitemapTestHelper {
   public function setUp($modules = array()) {
     $modules[] = 'robotstxt';
     parent::setUp($modules);
+    return TRUE;
   }
 
   /**

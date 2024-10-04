@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^$#"
+			message: "#^Method XMLSitemapWriter\\:\\:startElement\\(\\) should return bool but return statement is missing\\.$#"
 			count: 1
-			path: ../../xmlsitemap.module
+			path: ../../xmlsitemap.xmlsitemap.inc
+
+		-
+			message: "#^Method XMLSitemapWriter\\:\\:writeElement\\(\\) should return bool but return statement is missing\\.$#"
+			count: 1
+			path: ../../xmlsitemap.xmlsitemap.inc

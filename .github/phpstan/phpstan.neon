@@ -2,8 +2,8 @@
 # don't need to show up in every report.
 # If a problem got fixed, the file should be re-generated.
 # @see https://phpstan.org/user-guide/baseline
-# includes:
-#  - baseline.neon
+includes:
+  - baseline.neon
 # @see https://phpstan.org/config-reference
 parameters:
   level: 0
@@ -18,3 +18,4 @@ parameters:
   excludePaths:
     - *.tpl.php
     - *.api.php
+    - *.drush.inc

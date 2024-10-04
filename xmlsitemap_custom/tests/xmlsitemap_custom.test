@@ -22,6 +22,7 @@ class XMLSitemapCustomFunctionalTest extends XMLSitemapTestHelper {
 
     $this->admin_user = $this->backdropCreateUser(array('access content', 'administer xmlsitemap'));
     $this->backdropLogin($this->admin_user);
+    return TRUE;
   }
 
   /**

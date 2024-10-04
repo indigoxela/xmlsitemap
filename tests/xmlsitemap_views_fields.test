@@ -31,6 +31,7 @@ class XmlsitemapViewsFieldsTest extends BackdropWebTestCase {
     $modules[] = 'views';
     $modules[] = 'xmlsitemap_node';
     parent::setUp($modules);
+    return TRUE;
   }
 
   /**
