@@ -85,8 +85,14 @@ function xmlsitemap_sitemap_list_form() {
     // @todo Highlight sitemaps that need updating.
     // $options[$smid]['#attributes']['class'][] = 'warning';
     $operations = array();
-    $operations['edit'] = xmlsitemap_get_operation_link('admin/config/search/xmlsitemap/edit/' . $smid, array('title' => t('Edit'), 'modal' => TRUE));
-    $operations['delete'] = xmlsitemap_get_operation_link('admin/config/search/xmlsitemap/delete/' . $smid, array('title' => t('Delete'), 'modal' => TRUE));
+    $operations['edit'] = xmlsitemap_get_operation_link('admin/config/search/xmlsitemap/edit/' . $smid, array(
+      'title' => t('Edit'),
+      'modal' => TRUE,
+    ));
+    $operations['delete'] = xmlsitemap_get_operation_link('admin/config/search/xmlsitemap/delete/' . $smid, array(
+      'title' => t('Delete'),
+      'modal' => TRUE,
+    ));
     if ($operations) {
       $options[$smid]['operations'] = array(
         'data' => array(
@@ -586,7 +592,10 @@ function xmlsitemap_add_form_entity_summary(&$form, $entity, array $entity_info)
 
     $row = array();
     if (backdrop_valid_path("admin/config/search/xmlsitemap/settings/$entity/$bundle")) {
-      $edit_link = xmlsitemap_get_operation_link("admin/config/search/xmlsitemap/settings/$entity/$bundle", array('title' => $bundle_info['label'], 'modal' => TRUE));
+      $edit_link = xmlsitemap_get_operation_link("admin/config/search/xmlsitemap/settings/$entity/$bundle", array(
+        'title' => $bundle_info['label'],
+        'modal' => TRUE,
+      ));
       $row[] = l($edit_link['title'], $edit_link['href'], $edit_link);
     }
     else {

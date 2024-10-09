@@ -37,7 +37,7 @@ class XMLSitemapTestHelper extends BackdropWebTestCase {
    */
   public function tearDown() {
     // Capture any (remaining) watchdog errors.
-    //$this->_assertNoWatchdogErrors();
+    // $this->_assertNoWatchdogErrors();
     $this->_getWatchdogMessages(array(), TRUE);
 
     parent::tearDown();
@@ -58,7 +58,10 @@ class XMLSitemapTestHelper extends BackdropWebTestCase {
   protected function assertNoResponse($code, $message = '') {
     $curl_code = curl_getinfo($this->curlHandle, CURLINFO_HTTP_CODE);
     $match = is_array($code) ? in_array($curl_code, $code) : $curl_code == $code;
-    return $this->assertFalse($match, $message ? $message : t('HTTP response not expected !code, actual !curl_code', array('!code' => $code, '!curl_code' => $curl_code)), t('Browser'));
+    return $this->assertFalse($match, $message ? $message : t('HTTP response not expected !code, actual !curl_code', array(
+      '!code' => $code,
+      '!curl_code' => $curl_code,
+    )), t('Browser'));
   }
 
   /**
@@ -83,7 +86,7 @@ class XMLSitemapTestHelper extends BackdropWebTestCase {
    * @param array $headers
    *   An array containing additional HTTP request headers, each formatted as
    *   "name: value".
-   * @return
+   * @return string
    *   The retrieved HTML string, also available as $this->backdropGetContent()
    */
   protected function backdropGetSitemap(array $context = array(), array $options = array(), array $headers = array()) {
@@ -139,7 +142,10 @@ class XMLSitemapTestHelper extends BackdropWebTestCase {
    */
   protected function assertSitemapLinkVisible($entity_type, $entity_id) {
     $link = xmlsitemap_link_load($entity_type, $entity_id);
-    $this->assertTrue($link && $link['access'] && $link['status'], t('Sitemap link @type @id is visible.', array('@type' => $entity_type, '@id' => $entity_id)));
+    $this->assertTrue($link && $link['access'] && $link['status'], t('Sitemap link @type @id is visible.', array(
+      '@type' => $entity_type,
+      '@id' => $entity_id,
+    )));
   }
 
   /**
@@ -158,7 +164,7 @@ class XMLSitemapTestHelper extends BackdropWebTestCase {
    */
   protected function assertSitemapLinkValues($entity_type, $entity_id, array $conditions) {
     $link = xmlsitemap_link_load($entity_type, $entity_id);
-debug($link);
+
     if (!$link) {
       return $this->fail(t('Could not load sitemap link for @type @id.', array(
         '@type' => $entity_type,
@@ -225,7 +231,10 @@ debug($link);
   protected function assertRawSitemapLinks() {
     $links = func_get_args();
     foreach ($links as $link) {
-      $path = url($link['loc'], array('language' => xmlsitemap_language_load($link['langcode']), 'absolute' => TRUE));
+      $path = url($link['loc'], array(
+        'language' => xmlsitemap_language_load($link['langcode']),
+        'absolute' => TRUE,
+      ));
       $this->assertRaw($link['loc'], t('Link %path found in the sitemap.', array('%path' => $path)));
     }
   }
@@ -236,7 +245,10 @@ debug($link);
   protected function assertNoRawSitemapLinks() {
     $links = func_get_args();
     foreach ($links as $link) {
-      $path = url($link['loc'], array('language' => xmlsitemap_language_load($link['langcode']), 'absolute' => TRUE));
+      $path = url($link['loc'], array(
+        'language' => xmlsitemap_language_load($link['langcode']),
+        'absolute' => TRUE,
+      ));
       $this->assertNoRaw($link['loc'], t('Link %path not found in the sitemap.', array('%path' => $path)));
     }
   }
@@ -440,7 +452,10 @@ debug($link);
  */
 class XMLSitemapUnitTest extends XMLSitemapTestHelper {
 
-  function testAssertFlag() {
+  /**
+   * Test assert flag.
+   */
+  public function testAssertFlag() {
     state_set('xmlsitemap_rebuild_needed', TRUE);
     $this->assertTrue(state_get('xmlsitemap_rebuild_needed'));
     $this->assertTrue($this->assertFlag('xmlsitemap_rebuild_needed', TRUE, FALSE));
@@ -836,7 +851,8 @@ class XMLSitemapUnitTest extends XMLSitemapTestHelper {
     config_set('xmlsitemap.settings', 'path', 'test');
     backdrop_static_reset('xmlsitemap_get_directory');
 
-    // Test that running uninstall removes the correct directory (test) and not the default (xmlsitemap)
+    // Test that running uninstall removes the correct directory (test) and not
+    // the default (xmlsitemap)
     backdrop_uninstall_modules(array('xmlsitemap'));
     $this->assertFalse(is_dir('public://test'));
     $this->assertTrue(is_dir('public://xmlsitemap'));
@@ -876,7 +892,9 @@ class XMLSitemapFunctionalTest extends XMLSitemapTestHelper {
     $this->assertTrue($etag, t('Etag header found.'));
     $this->assertTrue($last_modified, t('Last-modified header found.'));
 
-    $this->backdropGetSitemap(array(), array(), array('If-Modified-Since: ' . $last_modified, 'If-None-Match: ' . $etag));
+    $this->backdropGetSitemap(array(), array(), array(
+      'If-Modified-Since: ' . $last_modified, 'If-None-Match: ' . $etag,
+    ));
     $this->assertResponse(304);
   }
 
